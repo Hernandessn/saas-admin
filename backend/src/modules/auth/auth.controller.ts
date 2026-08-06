@@ -44,7 +44,7 @@ export const loginHandler = asyncHandler(async (req, res) => {
 export const refreshHandler = asyncHandler(async (req, res) => {
   const token = req.cookies?.[env.refreshCookieName];
   if (!token) {
-    return res.status(401).json({ message: "Sessão ausente" });
+    return res.status(401).json({ message: "Session missing" });
   }
   const { user, accessToken, refreshToken } = await authService.refresh(token);
   setRefreshCookie(res, refreshToken);

@@ -19,7 +19,7 @@ export function createAuthRateLimiter() {
     standardHeaders: true,
     legacyHeaders: false,
     message: {
-      message: "Muitas tentativas. Aguarde 15 minutos antes de tentar novamente.",
+      message: "Too many attempts. Please wait 15 minutes before trying again.",
     },
     keyGenerator: (req) => req.ip ?? "unknown",
   });

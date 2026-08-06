@@ -32,10 +32,16 @@ const CSRF_HEADER = "x-nimbus-csrf";
  * reject outright. This does NOT replace SameSite, it covers the gap
  * SameSite leaves open.
  */
-export function requireCsrfHeader(req: Request, _res: Response, next: NextFunction) {
+export function requireCsrfHeader(
+  req: Request,
+  _res: Response,
+  next: NextFunction,
+) {
   if (req.get(CSRF_HEADER) !== "1") {
     return next(
-      ApiError.forbidden("Requisição bloqueada por proteção CSRF (header ausente ou inválido)")
+      ApiError.forbidden(
+        "Request blocked by CSRF protection (missing or invalid header)",
+      ),
     );
   }
   next();

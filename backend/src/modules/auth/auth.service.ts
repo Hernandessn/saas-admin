@@ -12,7 +12,12 @@ import {
 import { env } from "../../config/env";
 import { LoginInput, RegisterInput } from "./auth.schema";
 
-const PUBLIC_USER_SELECT = { id: true, email: true, name: true, createdAt: true };
+const PUBLIC_USER_SELECT = {
+  id: true,
+  email: true,
+  name: true,
+  createdAt: true,
+};
 
 async function issueTokenPair(userId: string, email: string, name: string) {
   const accessToken = signAccessToken({ sub: userId, email, name });
@@ -33,9 +38,11 @@ async function issueTokenPair(userId: string, email: string, name: string) {
 }
 
 export async function register(input: RegisterInput) {
-  const existing = await prisma.user.findUnique({ where: { email: input.email } });
+  const existing = await prisma.user.findUnique({
+    where: { email: input.email },
+  });
   if (existing) {
-    throw ApiError.conflict("Já existe uma conta com este e-mail");
+    throw ApiError.conflict("An account with this email already exists");
   }
 
   const passwordHash = await bcrypt.hash(input.password, 10);
@@ -51,17 +58,22 @@ export async function register(input: RegisterInput) {
 export async function login(input: LoginInput) {
   const user = await prisma.user.findUnique({ where: { email: input.email } });
   if (!user) {
-    throw ApiError.unauthorized("E-mail ou senha incorretos");
+    throw ApiError.unauthorized("Invalid email or password");
   }
 
   const valid = await bcrypt.compare(input.password, user.passwordHash);
   if (!valid) {
-    throw ApiError.unauthorized("E-mail ou senha incorretos");
+    throw ApiError.unauthorized("Invalid email or password");
   }
 
   const tokens = await issueTokenPair(user.id, user.email, user.name);
   return {
-    user: { id: user.id, email: user.email, name: user.name, createdAt: user.createdAt },
+    user: {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      createdAt: user.createdAt,
+    },
     ...tokens,
   };
 }
@@ -71,15 +83,21 @@ export async function refresh(refreshToken: string) {
   try {
     payload = verifyRefreshToken(refreshToken);
   } catch {
-    throw ApiError.unauthorized("Sessão expirada, faça login novamente");
+    throw ApiError.unauthorized("Session expired, please log in again");
   }
 
-  const stored = await prisma.refreshToken.findUnique({ where: { id: payload.jti } });
-  if (!stored || stored.revokedAt || stored.tokenHash !== hashToken(refreshToken)) {
-    throw ApiError.unauthorized("Sessão inválida, faça login novamente");
+  const stored = await prisma.refreshToken.findUnique({
+    where: { id: payload.jti },
+  });
+  if (
+    !stored ||
+    stored.revokedAt ||
+    stored.tokenHash !== hashToken(refreshToken)
+  ) {
+    throw ApiError.unauthorized("Invalid session, please log in again");
   }
   if (stored.expiresAt < new Date()) {
-    throw ApiError.unauthorized("Sessão expirada, faça login novamente");
+    throw ApiError.unauthorized("Session expired, please log in again");
   }
 
   // Rotate: revoke old, issue new
@@ -90,12 +108,17 @@ export async function refresh(refreshToken: string) {
 
   const user = await prisma.user.findUnique({ where: { id: stored.userId } });
   if (!user) {
-    throw ApiError.unauthorized("Usuário não encontrado");
+    throw ApiError.unauthorized("User not found");
   }
 
   const tokens = await issueTokenPair(user.id, user.email, user.name);
   return {
-    user: { id: user.id, email: user.email, name: user.name, createdAt: user.createdAt },
+    user: {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      createdAt: user.createdAt,
+    },
     ...tokens,
   };
 }
@@ -114,7 +137,10 @@ export async function logout(refreshToken: string | undefined) {
 }
 
 export async function getMe(userId: string) {
-  const user = await prisma.user.findUnique({ where: { id: userId }, select: PUBLIC_USER_SELECT });
-  if (!user) throw ApiError.notFound("Usuário não encontrado");
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: PUBLIC_USER_SELECT,
+  });
+  if (!user) throw ApiError.notFound("User not found");
   return user;
 }

@@ -9,14 +9,14 @@ const strongPassword = z
   .regex(/[^a-zA-Z0-9]/, "Inclua ao menos um símbolo (ex: !@#$)");
 
 export const loginSchema = z.object({
-  email: z.string().email("E-mail inválido"),
-  password: z.string().min(1, "Informe a senha"),
+  email: z.string().email("Invalid email"),
+  password: z.string().min(1, "Password is required"),
 });
 
 export const registerSchema = z
   .object({
-    name: z.string().min(2, "Informe seu nome completo"),
-    email: z.string().email("E-mail inválido"),
+    name: z.string().min(2, "Full name is required"),
+    email: z.string().email("Invalid email"),
     password: strongPassword,
     confirmPassword: z.string(),
   })

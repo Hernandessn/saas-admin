@@ -3,9 +3,9 @@ import { z } from "zod";
 export const clientStatusEnum = z.enum(["LEAD", "ACTIVE", "PAUSED", "CHURNED"]);
 
 export const createClientSchema = z.object({
-  name: z.string().min(2, "O nome deve ter no mínimo 2 caracteres").max(120),
+  name: z.string().min(2, "Name must be at least 2 characters long").max(120),
   status: clientStatusEnum.default("LEAD"),
-  value: z.coerce.number().min(0, "O valor não pode ser negativo"),
+  value: z.coerce.number().min(0, "Value cannot be negative"),
 });
 
 export const updateClientSchema = createClientSchema.partial();

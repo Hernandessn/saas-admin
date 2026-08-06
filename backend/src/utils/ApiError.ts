@@ -11,13 +11,13 @@ export class ApiError extends Error {
   static badRequest(message: string, details?: unknown) {
     return new ApiError(400, message, details);
   }
-  static unauthorized(message = "Não autorizado") {
+  static unauthorized(message = "Unauthorized") {
     return new ApiError(401, message);
   }
   static forbidden(message = "Acesso negado") {
     return new ApiError(403, message);
   }
-  static notFound(message = "Recurso não encontrado") {
+  static notFound(message = "Resource not found") {
     return new ApiError(404, message);
   }
   static conflict(message: string) {
