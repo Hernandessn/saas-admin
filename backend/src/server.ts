@@ -4,5 +4,5 @@ import { env } from "./config/env";
 const app = createApp();
 
 app.listen(env.port, () => {
-  console.log(`API rodando em http://localhost:${env.port} (${env.nodeEnv})`);
+  console.log(`API running on http://localhost:${env.port} (${env.nodeEnv})`);
 });

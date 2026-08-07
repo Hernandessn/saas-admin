@@ -26,12 +26,12 @@ const MONTHLY_BUCKETS = [4, 5, 6, 7, 8, 10];
 const COMPANY_SUFFIXES = [
   "Tecnologia",
   "Consultoria",
-  "Comércio",
-  "Serviços",
+  "Retail",
+  "Services",
   "Digital",
-  "Logística",
+  "Logistics",
   "Engenharia",
-  "Educação",
+  "Education",
 ];
 
 function randomValueForStatus(status: ClientStatus): number {
@@ -85,18 +85,18 @@ function dateWithinMonthOffset(monthsAgo: number): Date {
 }
 
 async function main() {
-  console.log("Limpando dados existentes...");
+  console.log("Cleaning up existing data...");
   await prisma.refreshToken.deleteMany();
   await prisma.client.deleteMany();
   await prisma.user.deleteMany();
 
-  console.log("Criando usuário demo...");
+  console.log("Creating demo user...");
   const passwordHash = await bcrypt.hash("Demo@1234", 10);
   const demoUser = await prisma.user.create({
     data: { name: "Ana Ribeiro", email: "demo@saasadmin.dev", passwordHash },
   });
 
-  console.log("Gerando registros de Clients...");
+  console.log("Generating client records...");
 
   const statusPool: ClientStatus[] = Object.entries(STATUS_QUOTAS).flatMap(
     ([status, count]) => Array(count).fill(status as ClientStatus),
@@ -137,10 +137,10 @@ async function main() {
   }, {});
 
   console.log(
-    `Seed concluído: 1 usuário e ${clientsData.length} Clients criados.`,
+    `Seed complete: 1 user and ${clientsData.length} clients created.`,
   );
-  console.log(`Distribuição de status: ${JSON.stringify(counts)}`);
-  console.log("Login demo -> email: demo@saasadmin.dev | Password: Demo@1234");
+  console.log(`Status distribution: ${JSON.stringify(counts)}`);
+  console.log("Demo login -> email: demo@saasadmin.dev | Password: Demo@1234");
 }
 
 main()
