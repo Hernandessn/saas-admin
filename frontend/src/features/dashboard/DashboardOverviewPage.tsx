@@ -40,9 +40,7 @@ export function DashboardOverviewPage() {
         />
         <MetricCard
           label="Monthly growth"
-          value={
-            metricsLoading ? "—" : `${metrics?.createdThisMonth ?? 0} novos`
-          }
+          value={metricsLoading ? "—" : `${metrics?.createdThisMonth ?? 0} new`}
           icon={<TrendingUp size={18} />}
           delta={metrics?.growthPct}
           deltaLabel="vs. last month"
