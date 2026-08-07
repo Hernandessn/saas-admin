@@ -109,7 +109,7 @@ export function ClientsPage() {
           value={params.status ?? ""}
           onChange={(e) => handleStatusFilter(e.target.value)}
         >
-          <option value="">Todos os status</option>
+          <option value="">All statuses</option>
           {Object.entries(STATUS_LABEL).map(([value, label]) => (
             <option
               key={value}
