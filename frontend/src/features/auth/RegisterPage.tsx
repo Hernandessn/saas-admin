@@ -12,9 +12,9 @@ import { cn } from "@/lib/cn";
 
 const passwordChecks = [
   { label: "8+ caracteres", test: (v: string) => v.length >= 8 },
-  { label: "1 maiúscula", test: (v: string) => /[A-Z]/.test(v) },
-  { label: "1 número", test: (v: string) => /[0-9]/.test(v) },
-  { label: "1 símbolo", test: (v: string) => /[^a-zA-Z0-9]/.test(v) },
+  { label: "1 uppercase letter", test: (v: string) => /[A-Z]/.test(v) },
+  { label: "1 number", test: (v: string) => /[0-9]/.test(v) },
+  { label: "1 symbol", test: (v: string) => /[^a-zA-Z0-9]/.test(v) },
 ];
 
 export function RegisterPage() {
@@ -37,23 +37,35 @@ export function RegisterPage() {
       await registerUser(values.name, values.email, values.password);
       navigate("/dashboard", { replace: true });
     } catch (err: any) {
-      setServerError(err?.response?.data?.message ?? "Não foi possível criar sua conta.");
+      setServerError(
+        err?.response?.data?.message ?? "Unable to create your account.",
+      );
     }
   };
 
   return (
-    <AuthLayout tagline="Comece em minutos. Sua base de clientes, organizada desde o primeiro dia.">
-      <h1 className="font-display text-2xl font-medium text-ink dark:text-paper">Criar conta</h1>
+    <AuthLayout tagline="Get started in minutes. Your client base, organized from day one.">
+      <h1 className="font-display text-2xl font-medium text-ink dark:text-paper">
+        Create account
+      </h1>
       <p className="mt-1.5 text-sm text-ink/60 dark:text-paper/60">
         Leva menos de um minuto para configurar.
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 flex flex-col gap-4">
-        <Input label="Nome completo" placeholder="Seu nome" error={errors.name?.message} {...register("name")} />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mt-6 flex flex-col gap-4"
+      >
+        <Input
+          label="Name completo"
+          placeholder="Your name"
+          error={errors.name?.message}
+          {...register("name")}
+        />
         <Input
           label="E-mail"
           type="email"
-          placeholder="voce@empresa.com"
+          placeholder="you@company.com"
           error={errors.email?.message}
           {...register("email")}
         />
@@ -74,7 +86,9 @@ export function RegisterPage() {
                   key={check.label}
                   className={cn(
                     "flex items-center gap-1 text-xs",
-                    passed ? "text-status-active" : "text-ink/40 dark:text-paper/40"
+                    passed
+                      ? "text-status-active"
+                      : "text-ink/40 dark:text-paper/40",
                   )}
                 >
                   {passed ? <Check size={12} /> : <X size={12} />}
@@ -86,7 +100,7 @@ export function RegisterPage() {
         )}
 
         <Input
-          label="Confirmar senha"
+          label="Confirm password"
           type="password"
           placeholder="••••••••"
           error={errors.confirmPassword?.message}
@@ -101,14 +115,17 @@ export function RegisterPage() {
         )}
 
         <Button type="submit" isLoading={isSubmitting} className="mt-2 w-full">
-          Criar conta
+          Create account
         </Button>
       </form>
 
       <p className="mt-6 text-sm text-ink/60 dark:text-paper/60">
-        Já tem conta?{" "}
-        <Link to="/login" className="font-medium text-brand-500 hover:underline">
-          Entrar
+        Already have an account?{" "}
+        <Link
+          to="/login"
+          className="font-medium text-brand-500 hover:underline"
+        >
+          Log in
         </Link>
       </p>
     </AuthLayout>

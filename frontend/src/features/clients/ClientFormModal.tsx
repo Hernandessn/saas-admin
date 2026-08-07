@@ -15,7 +15,12 @@ interface ClientFormModalProps {
   initialData?: ClientRecord | null;
 }
 
-export function ClientFormModal({ open, onClose, onSubmit, initialData }: ClientFormModalProps) {
+export function ClientFormModal({
+  open,
+  onClose,
+  onSubmit,
+  initialData,
+}: ClientFormModalProps) {
   const isEdit = !!initialData;
 
   const {
@@ -32,8 +37,12 @@ export function ClientFormModal({ open, onClose, onSubmit, initialData }: Client
     if (open) {
       reset(
         initialData
-          ? { name: initialData.name, status: initialData.status, value: initialData.value }
-          : { name: "", status: "LEAD", value: 0 }
+          ? {
+              name: initialData.name,
+              status: initialData.status,
+              value: initialData.value,
+            }
+          : { name: "", status: "LEAD", value: 0 },
       );
     }
   }, [open, initialData, reset]);
@@ -47,22 +56,39 @@ export function ClientFormModal({ open, onClose, onSubmit, initialData }: Client
     <Modal
       open={open}
       onClose={onClose}
-      title={isEdit ? "Editar registro" : "Novo registro"}
-      description={isEdit ? "Atualize as informações do cliente." : "Adicione um novo cliente à sua base."}
+      title={isEdit ? "Edit record" : "New record"}
+      description={
+        isEdit
+          ? "Update the client's information."
+          : "Add a new client to your base."
+      }
     >
       <form onSubmit={handleSubmit(submit)} className="flex flex-col gap-4">
-        <Input label="Nome" placeholder="Ex: Aurora Consultoria" error={errors.name?.message} {...register("name")} />
+        <Input
+          label="Name"
+          placeholder="e.g. Aurora Consulting"
+          error={errors.name?.message}
+          {...register("name")}
+        />
 
-        <Select label="Status" error={errors.status?.message} {...register("status")}>
+        <Select
+          label="Status"
+          error={errors.status?.message}
+          {...register("status")}
+        >
           {Object.entries(STATUS_LABEL).map(([value, label]) => (
-            <option key={value} value={value}>
+            <option
+              key={value}
+              value={value}
+              className="bg-zinc-900 text-white"
+            >
               {label}
             </option>
           ))}
         </Select>
 
         <Input
-          label="Valor (R$)"
+          label="Value (USD)"
           type="number"
           step="0.01"
           min="0"
@@ -73,10 +99,10 @@ export function ClientFormModal({ open, onClose, onSubmit, initialData }: Client
 
         <div className="mt-2 flex justify-end gap-2">
           <Button type="button" variant="ghost" onClick={onClose}>
-            Cancelar
+            Cancel
           </Button>
           <Button type="submit" isLoading={isSubmitting}>
-            {isEdit ? "Salvar alterações" : "Criar registro"}
+            {isEdit ? "Save changes" : "Create record"}
           </Button>
         </div>
       </form>

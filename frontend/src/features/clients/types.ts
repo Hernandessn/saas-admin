@@ -28,7 +28,7 @@ export interface ClientMetrics {
 
 export const STATUS_LABEL: Record<ClientStatus, string> = {
   LEAD: "Lead",
-  ACTIVE: "Ativo",
-  PAUSED: "Pausado",
-  CHURNED: "Perdido",
+  ACTIVE: "Active",
+  PAUSED: "Paused",
+  CHURNED: "Lost",
 };

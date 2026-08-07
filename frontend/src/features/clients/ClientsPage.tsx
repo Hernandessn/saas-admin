@@ -36,7 +36,11 @@ export function ClientsPage() {
   };
 
   const handleStatusFilter = (value: string) => {
-    setParams((p) => ({ ...p, status: value ? (value as any) : undefined, page: 1 }));
+    setParams((p) => ({
+      ...p,
+      status: value ? (value as any) : undefined,
+      page: 1,
+    }));
   };
 
   const openCreateModal = () => {
@@ -74,22 +78,27 @@ export function ClientsPage() {
     <div className="flex flex-col gap-5">
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
-          <h2 className="font-display text-2xl font-medium text-ink dark:text-paper">Clientes</h2>
+          <h2 className="font-display text-2xl font-medium text-ink dark:text-paper">
+            Clients
+          </h2>
           <p className="mt-1 text-sm text-ink/55 dark:text-paper/55">
-            Gerencie sua base de clientes, leads e oportunidades.
+            Manage your clients, leads, and opportunities.
           </p>
         </div>
         <Button onClick={openCreateModal} className="w-full sm:w-auto">
           <Plus size={16} />
-          Novo registro
+          New record
         </Button>
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="relative flex-1">
-          <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink/40 dark:text-paper/40" />
+          <Search
+            size={16}
+            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink/40 dark:text-paper/40"
+          />
           <Input
-            placeholder="Buscar por nome..."
+            placeholder="Search by name..."
             value={searchInput}
             onChange={(e) => applySearch(e.target.value)}
             className="pl-9"
@@ -102,7 +111,11 @@ export function ClientsPage() {
         >
           <option value="">Todos os status</option>
           {Object.entries(STATUS_LABEL).map(([value, label]) => (
-            <option key={value} value={value}>
+            <option
+              key={value}
+              value={value}
+              className="bg-zinc-900 text-white"
+            >
               {label}
             </option>
           ))}
@@ -132,9 +145,9 @@ export function ClientsPage() {
         onClose={() => setDeleteTarget(null)}
         onConfirm={handleConfirmDelete}
         isLoading={deleting}
-        title="Excluir registro"
-        description={`Tem certeza que deseja excluir "${deleteTarget?.name}"? Esta ação não pode ser desfeita.`}
-        confirmLabel="Excluir"
+        title="Delete record"
+        description={`Are you sure you want to delete "${deleteTarget?.name}"? This action cannot be undone.`}
+        confirmLabel="Delete"
       />
     </div>
   );

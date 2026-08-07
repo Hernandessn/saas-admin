@@ -17,14 +17,19 @@ export function ConfirmDialog({
   onConfirm,
   title,
   description,
-  confirmLabel = "Confirmar",
+  confirmLabel = "Confirm",
   isLoading,
 }: ConfirmDialogProps) {
   return (
-    <Modal open={open} onClose={onClose} title={title} description={description}>
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={title}
+      description={description}
+    >
       <div className="mt-2 flex justify-end gap-2">
         <Button variant="ghost" onClick={onClose}>
-          Cancelar
+          Cancel
         </Button>
         <Button variant="danger" isLoading={isLoading} onClick={onConfirm}>
           {confirmLabel}

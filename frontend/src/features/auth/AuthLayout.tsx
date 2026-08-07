@@ -1,6 +1,12 @@
 import { ReactNode } from "react";
 
-export function AuthLayout({ children, tagline }: { children: ReactNode; tagline: string }) {
+export function AuthLayout({
+  children,
+  tagline,
+}: {
+  children: ReactNode;
+  tagline: string;
+}) {
   return (
     <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[1fr_1fr]">
       <div className="flex items-center justify-center px-6 py-12 sm:px-10">
@@ -9,7 +15,9 @@ export function AuthLayout({ children, tagline }: { children: ReactNode; tagline
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-500 font-display text-base font-semibold text-volt">
               N
             </span>
-            <span className="font-display text-lg font-medium text-ink dark:text-paper">Nimbus</span>
+            <span className="font-display text-lg font-medium text-ink dark:text-paper">
+              Nimbus
+            </span>
           </div>
           {children}
         </div>
@@ -26,11 +34,13 @@ export function AuthLayout({ children, tagline }: { children: ReactNode; tagline
         <div className="relative flex h-full flex-col justify-between p-14">
           <div />
           <div className="max-w-md">
-            <p className="font-display text-3xl font-medium leading-snug text-paper">{tagline}</p>
+            <p className="font-display text-3xl font-medium leading-snug text-paper">
+              {tagline}
+            </p>
             <div className="mt-8 flex items-center gap-3">
               <div className="h-px flex-1 bg-paper/20" />
               <span className="font-mono text-xs uppercase tracking-widest text-volt">
-                painel operacional
+                operational dashboard
               </span>
             </div>
           </div>

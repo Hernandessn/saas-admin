@@ -2,11 +2,11 @@ import { z } from "zod";
 
 const strongPassword = z
   .string()
-  .min(8, "Mínimo de 8 caracteres")
-  .regex(/[a-z]/, "Inclua ao menos uma letra minúscula")
-  .regex(/[A-Z]/, "Inclua ao menos uma letra maiúscula")
-  .regex(/[0-9]/, "Inclua ao menos um número")
-  .regex(/[^a-zA-Z0-9]/, "Inclua ao menos um símbolo (ex: !@#$)");
+  .min(8, "Minimum 8 characters")
+  .regex(/[a-z]/, "Include at least one lowercase letter")
+  .regex(/[A-Z]/, "Include at least one uppercase letter")
+  .regex(/[0-9]/, "Include at least one number")
+  .regex(/[^a-zA-Z0-9]/, "Include at least one symbol (e.g. !@#$)");
 
 export const loginSchema = z.object({
   email: z.string().email("Invalid email"),
@@ -21,7 +21,7 @@ export const registerSchema = z
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "As senhas não coincidem",
+    message: "Passwords do not match",
     path: ["confirmPassword"],
   });
 

@@ -5,8 +5,8 @@ import { Topbar } from "@/components/layout/Topbar";
 import { cn } from "@/lib/cn";
 
 const TITLES: Record<string, string> = {
-  "/dashboard": "Visão geral",
-  "/dashboard/clientes": "Clientes",
+  "/dashboard": "Overview",
+  "/dashboard/clients": "Clients",
 };
 
 export function DashboardLayout() {
@@ -16,13 +16,18 @@ export function DashboardLayout() {
 
   const title =
     TITLES[location.pathname] ??
-    (location.pathname.startsWith("/dashboard/clientes") ? "Clientes" : "Visão geral");
+    (location.pathname.startsWith("/dashboard/clients")
+      ? "Clients"
+      : "Overview");
 
   return (
     <div className="flex h-screen overflow-hidden bg-paper dark:bg-ink">
       {/* Desktop sidebar */}
       <div className="hidden lg:block">
-        <Sidebar collapsed={collapsed} onToggle={() => setCollapsed((c) => !c)} />
+        <Sidebar
+          collapsed={collapsed}
+          onToggle={() => setCollapsed((c) => !c)}
+        />
       </div>
 
       {/* Mobile sidebar drawer */}
@@ -33,7 +38,11 @@ export function DashboardLayout() {
             onClick={() => setMobileOpen(false)}
           />
           <div className={cn("relative z-50 h-full animate-scale-in")}>
-            <Sidebar collapsed={false} onToggle={() => setMobileOpen(false)} onNavigate={() => setMobileOpen(false)} />
+            <Sidebar
+              collapsed={false}
+              onToggle={() => setMobileOpen(false)}
+              onNavigate={() => setMobileOpen(false)}
+            />
           </div>
         </div>
       )}

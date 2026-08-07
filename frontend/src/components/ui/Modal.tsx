@@ -12,7 +12,14 @@ interface ModalProps {
   className?: string;
 }
 
-export function Modal({ open, onClose, title, description, children, className }: ModalProps) {
+export function Modal({
+  open,
+  onClose,
+  title,
+  description,
+  children,
+  className,
+}: ModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,21 +52,26 @@ export function Modal({ open, onClose, title, description, children, className }
         className={cn(
           "w-full max-w-md animate-scale-in rounded-xl2 border border-ink/8 bg-white p-6 shadow-card",
           "dark:border-paper/10 dark:bg-ink-soft dark:shadow-card-dark",
-          className
+          className,
         )}
       >
         <div className="mb-5 flex items-start justify-between gap-4">
           <div>
-            <h2 id="modal-title" className="font-display text-xl font-medium text-ink dark:text-paper">
+            <h2
+              id="modal-title"
+              className="font-display text-xl font-medium text-ink dark:text-paper"
+            >
               {title}
             </h2>
             {description && (
-              <p className="mt-1 text-sm text-ink/60 dark:text-paper/60">{description}</p>
+              <p className="mt-1 text-sm text-ink/60 dark:text-paper/60">
+                {description}
+              </p>
             )}
           </div>
           <button
             onClick={onClose}
-            aria-label="Fechar"
+            aria-label="Close"
             className="rounded-lg p-1.5 text-ink/50 transition-colors duration-150 hover:bg-ink/5 hover:text-ink dark:text-paper/50 dark:hover:bg-paper/10 dark:hover:text-paper"
           >
             <X size={18} />
@@ -68,6 +80,6 @@ export function Modal({ open, onClose, title, description, children, className }
         {children}
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }

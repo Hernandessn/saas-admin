@@ -19,13 +19,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <select
           ref={ref}
           id={selectId}
-          className={cn(
-            "h-10 rounded-xl border border-ink/15 bg-white px-3 text-sm text-ink",
-            "outline-none transition-all duration-150 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10",
-            "dark:border-paper/15 dark:bg-white/5 dark:text-paper",
-            error && "border-status-churned",
-            className
-          )}
+className={cn(
+  "h-10 rounded-xl border border-ink/15 bg-white px-3 text-sm text-ink color-scheme-light",
+  "outline-none transition-all duration-150 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10",
+  "dark:border-paper/15 dark:bg-white/5 dark:text-paper dark:[color-scheme:dark]",
+  error && "border-status-churned",
+  className
+)}
           {...props}
         >
           {children}

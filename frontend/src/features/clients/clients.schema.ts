@@ -3,8 +3,8 @@ import { z } from "zod";
 export const clientFormSchema = z.object({
   name: z
     .string()
-    .min(2, "Mínimo de 2 caracteres")
-    .max(120, "Máximo de 120 caracteres"),
+    .min(2, "Minimum 2 characters")
+    .max(120, "Maximum 120 characters"),
   status: z.enum(["LEAD", "ACTIVE", "PAUSED", "CHURNED"]),
   value: z.coerce.number().min(0, "Value cannot be negative"),
 });

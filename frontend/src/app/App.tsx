@@ -20,7 +20,7 @@ export default function App() {
       <Route element={<ProtectedRoute />}>
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<DashboardOverviewPage />} />
-          <Route path="/dashboard/clientes" element={<ClientsPage />} />
+          <Route path="/dashboard/clients" element={<ClientsPage />} />
         </Route>
       </Route>
 

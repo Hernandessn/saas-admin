@@ -11,7 +11,10 @@ const DEFAULT_PARAMS: ListClientsParams = {
 };
 
 export function useClients(initialParams: Partial<ListClientsParams> = {}) {
-  const [params, setParams] = useState<ListClientsParams>({ ...DEFAULT_PARAMS, ...initialParams });
+  const [params, setParams] = useState<ListClientsParams>({
+    ...DEFAULT_PARAMS,
+    ...initialParams,
+  });
   const [data, setData] = useState<Paginated<ClientRecord> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -29,7 +32,7 @@ export function useClients(initialParams: Partial<ListClientsParams> = {}) {
         if (!cancelled) setData(res);
       })
       .catch(() => {
-        if (!cancelled) setError("Não foi possível carregar os registros.");
+        if (!cancelled) setError("Unable to load records.");
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
