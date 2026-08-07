@@ -45,7 +45,7 @@ export function LoginPage() {
       </p>
 
       <div className="mt-4 rounded-lg border border-brand-500/20 bg-brand-50 px-3 py-2 text-xs text-brand-700 dark:border-brand-400/20 dark:bg-brand-500/10 dark:text-brand-200">
-        Conta demo: <span className="font-mono">demo@saasadmin.dev</span> /{" "}
+        Demo account: <span className="font-mono">demo@saasadmin.dev</span> /{" "}
         <span className="font-mono">Demo@1234</span>
       </div>
 
