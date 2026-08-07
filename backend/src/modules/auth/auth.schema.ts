@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-// Senha forte: min 8 chars, ao menos 1 maiúscula, 1 minúscula, 1 número, 1 símbolo
+// Password forte: min 8 chars, ao menos 1 maiúscula, 1 minúscula, 1 número, 1 símbolo
 const strongPassword = z
   .string()
   .min(8, "Password must be at least 8 characters long")

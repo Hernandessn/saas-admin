@@ -140,7 +140,7 @@ async function main() {
     `Seed concluído: 1 usuário e ${clientsData.length} Clients criados.`,
   );
   console.log(`Distribuição de status: ${JSON.stringify(counts)}`);
-  console.log("Login demo -> email: demo@saasadmin.dev | senha: Demo@1234");
+  console.log("Login demo -> email: demo@saasadmin.dev | Password: Demo@1234");
 }
 
 main()

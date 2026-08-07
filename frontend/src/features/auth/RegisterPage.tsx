@@ -63,14 +63,14 @@ export function RegisterPage() {
           {...register("name")}
         />
         <Input
-          label="E-mail"
+          label="Email"
           type="email"
           placeholder="you@company.com"
           error={errors.email?.message}
           {...register("email")}
         />
         <Input
-          label="Senha"
+          label="Password"
           type="password"
           placeholder="••••••••"
           error={errors.password?.message}
